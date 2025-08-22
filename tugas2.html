@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <style>
+    :root{
+      --bg: #0f172a;           /* slate-900 */
+      --panel: #111827;        /* gray-900 */
+      --muted: #cbd5e1;        /* slate-300 */
+      --text: #f8fafc;         /* slate-50 */
+      --accent: #22d3ee;       /* cyan-400 */
+      --accent-2: #a78bfa;     /* violet-400 */
+      --accent-3: #f97316;     /* orange-500 */
+      --card: #0b1020;         /* darker panel */
+      --shadow: 0 10px 24px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    a{color:var(--accent)}
+
+    /* ===== Global Layout ===== */
+    .container{max-width:1100px;margin-inline:auto;padding:16px}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    /* ===== Section 1: Menu ===== */
+    nav{position:sticky;top:0;z-index:10;background:rgba(15,23,42,.7);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .menu{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-items:center}
+    .brand{font-weight:800;letter-spacing:.5px;color:var(--accent-2)}
+    .menu a{display:block;text-align:center;text-decoration:none;color:var(--text);padding:12px 10px;border-radius:10px;background:var(--panel);border:1px solid rgba(255,255,255,.06)}
+    .menu a:hover{transform:translateY(-1px);box-shadow:0 8px 16px rgba(0,0,0,.35);background:linear-gradient(180deg, rgba(167,139,250,.2), rgba(34,211,238,.15));}
+
+    /* ===== Section 2: Header (Title left, Image right) ===== */
+    .hero{margin-top:16px;padding:24px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center}
+    .hero h1{font-size:clamp(28px,4vw,44px);margin:0 0 8px 0}
+    .hero p{color:var(--muted);line-height:1.6}
+    .hero .cta{display:flex;gap:12px;margin-top:16px}
+    .btn{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:700}
+    .btn-primary{background:linear-gradient(90deg, var(--accent), var(--accent-2));color:#071827}
+    .btn-ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.2)}
+    .hero-figure{display:grid;place-items:center}
+    .photo{width:min(100%,380px);aspect-ratio:4/3;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(135deg,rgba(34,211,238,.2),rgba(167,139,250,.15));display:grid;place-items:center;overflow:hidden}
+    .photo img{max-width:88%;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.45))}
+    .caption{margin-top:8px;color:var(--muted);font-size:14px;text-align:center}
+
+    /* ===== Section 3: Biodata (6 boxes) ===== */
+    .biodata{padding:24px}
+    .section-title{margin:0 0 12px 0;font-size:clamp(22px,3vw,32px)}
+    .section-sub{margin:0 0 20px 0;color:var(--muted)}
+    .bio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;min-height:98px}
+    .card h4{margin:0 0 6px 0;color:var(--accent)}
+    .chip{display:inline-block;margin-top:6px;padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.15);font-size:12px;color:var(--muted)}
+    ul.inline{margin:6px 0 0 0;padding-left:18px}
+
+    /* ===== Section 4: Portfolio ===== */
+    .portfolio{padding:24px}
+    .port-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .work{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;display:grid}
+    .work .thumb{aspect-ratio:4/3;background:linear-gradient(120deg, rgba(249,115,22,.25), rgba(34,211,238,.18));display:grid;place-items:center;border-bottom:1px solid rgba(255,255,255,.08)}
+    .work .thumb img{max-width:85%;height:auto}
+    .work .meta{padding:14px}
+    .work h3{margin:0 0 6px 0}
+    .work p{margin:0;color:var(--muted)}
+
+    /* ===== Footer back-to-top ===== */
+    .to-top{padding:12px;text-align:right}
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px){
+      .menu{grid-template-columns:1fr 1fr 1fr 1fr}
+      .hero-grid{grid-template-columns:1fr;}
+      .hero-figure{order:-1}
+      .bio-grid{grid-template-columns:repeat(2,1fr)}
+      .port-grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 600px){
+      .menu{grid-template-columns:1fr 1fr;gap:6px}
+      .brand{grid-column:1/-1;text-align:center}
+      .hero{padding:16px}
+      .biodata,.portfolio{padding:16px}
+      .bio-grid{grid-template-columns:1fr}
+    }
+    footer {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Section 1: Menu (DIV + CSS Grid) ===== -->
+  <nav id="menu">
+    <div class="container">
+      <div class="menu">
+        <div class="brand">MyPortfolio</div>
+        <a href="#section2">Header</a>
+        <a href="#section3">Biodata</a>
+        <a href="#section4">Portofolio</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- ===== Section 2: Header (Title left, Image right) ===== -->
+    <section id="section2" class="panel hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>Selamat Datang di Website Saya</h1>
+          <p>
+            Ini adalah contoh header dua kolom: judul dan deskripsi di kiri, gambar di kanan. 
+            Tata letak menggunakan <strong>DIV</strong> dan <strong>CSS Grid</strong> tanpa tabel.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#section3">Tentang Saya</a>
+            <a class="btn btn-ghost" href="#section4">Lihat Portofolio</a>
+          </div>
+          <p class="caption">Gunakan menu di atas untuk navigasi cepat.</p>
+        </div>
+        <div class="hero-figure">
+          <div class="photo">
+            <img src="https://ds393qgzrxwzn.cloudfront.net/resize/c500x500/cat1/img/images/0/v9Za1zw7E7.jpg" alt="Gambar Header"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Section 3: Biodata (6 Box) ===== -->
+    <section id="section3" class="panel biodata">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-sub">A brief introduction about myself</p>
+      <div class="bio-grid">
+        <div class="card">
+          <h4>Full Name</h4>
+          <div>Rakha Aly Panca</div>
+        </div>
+        <div class="card">
+          <h4>Education</h4>
+          <div>S1 Teknologi Informasi</div>
+        </div>
+        <div class="card">
+          <h4>Pekerjaan</h4>
+          <div>Programmer</div>
+        </div>
+        <div class="card">
+          <h4>Contact</h4>
+          <div>Email: <a href="mailto:email@contoh.com">rakhaalypanca23@gmail.com</a></div>
+          <span class="chip">+62 895-3378-29930</span>
+        </div>
+        <div class="card">
+          <h4>Hobi</h4>
+          <ul class="inline">
+            <li>Olahraga</li>
+            <li>Nonton Film</li>
+            <li>Gaming</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Alamat</h4>
+          <div>Tangerang</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Section 4: Portofolio ===== -->
+    <section id="section4" class="panel portfolio">
+      <h2 class="section-title">Portofolio</h2>
+      <div class="port-grid">
+        <article class="work">
+          <div class="thumb">
+            <img src="https://integrasolusi.com/wp-content/uploads/2023/08/PANDUAN-DASAR-MENGELOLA-PROJECT-IT-DENGAN-EFEKTIF.jpg" alt="Proyek 1" />
+          </div>
+          <div class="meta">
+            <h3>Proyek 1</h3>
+            <p>Poster promosi acara musik dengan fokus tipografi dan kontras.</p>
+          </div>
+        </article>
+        <article class="work">
+          <div class="thumb">
+            <img src="https://integrasolusi.com/wp-content/uploads/2023/08/TAHAPAN-PENTING-DALAM-IT-PROJECT-MANAJEMENT.jpg" alt="Proyek 2" />
+          </div>
+          <div class="meta">
+            <h3>Proyek 2</h3>
+            <p>Landing page produk digital.</p>
+          </div>
+        </article>
+        <article class="work">
+          <div class="thumb">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLNtS_MCBdqNVKsRgPcMrIJntAJirdwGJdS2jzKmyPcqJSjbuDVIYEN7z4yQ_gq_FBsIk&usqp=CAU" alt="Proyek 3" />
+          </div>
+          <div class="meta">
+            <h3>Proyek 3</h3>
+            <p>Logo minimalis dengan pendekatan geometri.</p>
+          </div>
+        </article>
+        <article class="work">
+          <div class="thumb">
+            <img src="https://www.gamelab.id/uploads/news/berita-1591-wajib-tahu-pentingnya-manajemen-proyek-untuk-efektivitas-kerja-share-20220316-185105.jpg" alt="Proyek 4" />
+          </div>
+          <div class="meta">
+            <h3>Proyek 4</h3>
+            <p>Desain kartu nama & identitas merek.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy;Powered By Rakha Aly Panca <time datetime="2025">2025</time></p>
+  </footer>
+</body>
+</html>
